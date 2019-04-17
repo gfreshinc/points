@@ -3,7 +3,7 @@ require 'securerandom'
 
 module GfreshPoint
   module Usecase
-    class RoomListUsecaseTest < Minitest::Test
+    class RuleListUsecaseTest < Minitest::Test
 
 
     end

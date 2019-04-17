@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "gfresh_point/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "GfreshPoint"
+  spec.name          = "gfresh_point"
   spec.version       = GfreshPoint::VERSION
   spec.authors       = ["teddy"]
   spec.email         = ["mlc880926@gmail.com"]

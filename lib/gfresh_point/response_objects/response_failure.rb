@@ -1,9 +1,9 @@
 module GfreshPoint
   module ResponseObjects
     class ResponseFailure
-      RESOURCE_ERROR = 'ResourceError'
+      RESOURCE_ERROR   = 'ResourceError'
       PARAMETERS_ERROR = 'ParametersError'
-      SYSTEM_ERROR = 'SystemError'
+      SYSTEM_ERROR     = 'SystemError'
 
       def initialize(type, message)
         @type = type

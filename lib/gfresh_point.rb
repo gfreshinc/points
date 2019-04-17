@@ -8,6 +8,8 @@ require "gfresh_point/request_objects/rule_list_request_object"
 require "gfresh_point/response_objects/response_success"
 require "gfresh_point/response_objects/response_failure"
 
+# Generators
+require 'generators/gfresh_point/install/install_generator'
 
 module GfreshPoint
   class Error < StandardError; end

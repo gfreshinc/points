@@ -10,7 +10,6 @@ module GfreshPoint
       def execute(request)
         rules = repo.list(filter: request.filters)
       end
-
     end
   end
 end

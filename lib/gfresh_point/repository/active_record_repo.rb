@@ -1,3 +1,4 @@
+
 module GfreshPoint
   module Repository
     class ActiveRecordRepo
@@ -5,12 +6,12 @@ module GfreshPoint
         Rule.where(app_id: app_id)
       end
 
-      def create_rule(app_id, event_name, point)
-
+      def update_rule_point(app_id, rule_id, point)
+        Rule.find(rule_id).update!(point: point)
       end
     end
 
-    class Rule < ApplicationRecord
+    class Rule < ActiveRecord::Base
       self.table_name = "gfresh_point_rules"
     end
   end

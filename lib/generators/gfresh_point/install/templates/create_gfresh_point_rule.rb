@@ -1,4 +1,4 @@
-class CreateGfreshPointRule < ActiveRecord::Migration
+class CreateGfreshPointRule < ActiveRecord::Migration[5.2]
   def change
     create_table :gfresh_point_rules do |t|
       t.string :app_id

@@ -1,3 +1,3 @@
 # Gfresh Point
 
-rails generate gfresh_point:install
+bundle exec rails generate gfresh_point:install

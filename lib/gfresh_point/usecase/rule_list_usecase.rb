@@ -1,14 +1,9 @@
 module GfreshPoint
   module Usecase
-    class RuleListUsecase
-      attr_accessor :repo # or attr_reader ???
-
-      def initialize(repo)
-        @repo = repo
-      end
-
+    class RuleListUsecase < BaseUsecase
       def execute(request)
-        rules = repo.list(filter: request.filters)
+        # rules = repo.list(filter: request.filters)
+        rules = repo.list_rules(request.filters[:app_id])
       end
     end
   end

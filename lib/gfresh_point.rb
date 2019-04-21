@@ -3,6 +3,8 @@ require "gfresh_point/domain/rule"
 # require "gfresh_point/serializers/rule_json_encoder"
 require "gfresh_point/usecase/base_usecase"
 require "gfresh_point/usecase/rule_list_usecase"
+require "gfresh_point/usecase/update_rule_point_usecase"
+
 require "gfresh_point/repository/mem_repo"
 require "gfresh_point/repository/active_record_repo"
 require "gfresh_point/request_objects/request_object"

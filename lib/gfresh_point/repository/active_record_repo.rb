@@ -7,6 +7,7 @@ module GfreshPoint
       end
 
       def update_rule_point(app_id, rule_id, point)
+
         Rule.find(rule_id).update!(point: point)
       end
     end

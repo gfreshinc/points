@@ -1,16 +1,21 @@
 module GfreshPoint
   module RequestObjects
     class UpdateRulePointRequest < RequestObject
-      attr_accessor :filters
+      attr_accessor :app_id, :rule_id, :point
 
-      ACCEPTED_FILTERS = ['app_id']
+      def initialize(app_id, rule_id, point)
+        @app_id = app_id
+        @rule_id = rule_id
+        @point = point
 
-      def initialize(params = {}) 
-        @filters = params[:filters] || {}
-        @filters.keys.each do |filter|
-          unless ACCEPTED_FILTERS.include?(filter.to_s)
-            add_error('filters', "Key #{filter} can not be used")
-          end
+        if app_id.blank?
+          add_error('app_id', "App id can not be blank")
+        end
+        if rule_id.blank?
+          add_error('rule_id', "Id #{rule_id} can not be blank")
+        end
+        if point.blank?
+          add_error('app_id', "Point can not be blank")
         end
       end
 

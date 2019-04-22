@@ -1,7 +1,7 @@
 module GfreshPoint
   module RequestObjects
-    class UpdateRulePointRequest < RequestObject
-      attr_accessor :app_id, :rule_id, :point
+    class ConsumePointRequest < RequestObject
+      attr_accessor :app_id, :user_id, :point
 
       def initialize(app_id, rule_id, point)
         @app_id = app_id
@@ -11,11 +11,11 @@ module GfreshPoint
         if app_id.blank?
           add_error('app_id', "App id can not be blank")
         end
-        if rule_id.blank?
-          add_error('rule_id', "Rule id can not be blank")
+        if user_id.blank?
+          add_error('user_id', "User id can not be blank")
         end
-        if point.blank?
-          add_error('app_id', "Point can not be blank")
+        if point.to_i < 0
+          add_error('point', "Point must larger than 0")
         end
       end
 

@@ -10,11 +10,6 @@ module GfreshPoint
         @point = point
       end
 
-      def ==(other)
-        app_id == other.app_id && \
-        event_name == other.event_name && \
-        point == other.point
-      end
     end
   end
 end

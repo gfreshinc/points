@@ -8,18 +8,15 @@ module GfreshPoint
       end
 
       def call(request)
-          #  verify_request(request)
         if request.success?
           result = execute(request)
           generate_response(result)
         else
           ResponseFailure(ResponseFailure::PARAMETERS_ERROR, request.errors)
         end
+      rescue StandardError => e
+        ResponseFailure(ResponseFailure::SYSTEM_ERROR, e.message)
       end
-
-      # def verify_request(request)
-      #   return ResponseFailure(request.) unless request.success?
-      # end
 
       def generate_response(result)
         GfreshPoint::ResponseObjects::ResponseSuccess.new(result)

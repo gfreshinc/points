@@ -8,8 +8,8 @@ module GfreshPoint
         @data = data
       end
 
-      def list
-        data
+      def list_rules(app_id)
+        data.select {|d| d.app_id == app_id}
       end
 
     end

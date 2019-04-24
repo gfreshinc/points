@@ -25,9 +25,10 @@ require 'active_record'
 
 module GfreshPoint
   class Client
-    attr_reader :app_id
-    def initialize(app_id)
+    attr_reader :app_id, :repo
+    def initialize(app_id, repo = GfreshPoint::Repository::ActiveRecordRepo.new)
       @app_id = app_id
+      @repo = repo
     end
 
     def list_rules
@@ -50,10 +51,6 @@ module GfreshPoint
 
     def earn_point
 
-    end
-
-    def repo
-      @repo ||= GfreshPoint::Repository::ActiveRecordRepo.new
     end
 
   end

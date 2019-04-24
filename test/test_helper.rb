@@ -4,8 +4,6 @@ require "gfresh_point"
 require "minitest/autorun"
 require "pry"
 
-
-
 require 'active_record'
 
 ActiveRecord::Base.establish_connection adapter: "sqlite3", database: ":memory:"

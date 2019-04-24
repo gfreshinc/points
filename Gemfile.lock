@@ -35,6 +35,7 @@ GEM
     coderay (1.1.2)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
+    database_cleaner (1.7.0)
     erubi (1.8.0)
     generator_spec (0.9.4)
       activesupport (>= 3.0.0)
@@ -83,6 +84,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   bundler (~> 2.0)
+  database_cleaner
   generator_spec
   gfresh_point!
   minitest (~> 5.0)

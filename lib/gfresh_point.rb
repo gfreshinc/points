@@ -24,6 +24,37 @@ require 'generators/gfresh_point/install/install_generator'
 require 'active_record'
 
 module GfreshPoint
-  class Error < StandardError; end
-  # Your code goes here...
+  class Client
+    attr_reader :app_id
+    def initialize(app_id)
+      @app_id = app_id
+    end
+
+    def list_rules
+      request = GfreshPoint::RequestObjects::RuleListRequest.new(filters: {app_id: app_id})
+      use_case = GfreshPoint::Usecase::RuleListUsecase.new(repo)
+      response = use_case.call(request)
+      response
+    end
+
+    def update_rule_point(rule_id, point)
+      request = GfreshPoint::RequestObjects::UpdateRulePointRequest.new(app_id, rule_id, point)
+      use_case = GfreshPoint::Usecase::UpdateRulePointUsecase.new(repo)
+      response = use_case.call(request)
+      response
+    end
+
+    def consume_point
+
+    end
+
+    def earn_point
+
+    end
+
+    def repo
+      @repo ||= GfreshPoint::Repository::ActiveRecordRepo.new
+    end
+
+  end
 end

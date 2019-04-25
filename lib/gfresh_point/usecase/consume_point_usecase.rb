@@ -9,7 +9,7 @@ module GfreshPoint
           request.add_error('point', 'not enough balance point')
         else
           # save balance and rule snapshot
-          repo.create_balance(request.app_id, request.user_id, rule.point, last_balance - rule.point, rule.to_json)
+          repo.create_balance(request.app_id, request.user_id, rule.point * -1, last_balance - rule.point, rule.to_json)
         end
       end
     end

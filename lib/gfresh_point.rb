@@ -45,15 +45,16 @@ module GfreshPoint
       response
     end
 
-    def consume_point(user_id, point)
-      request = GfreshPoint::RequestObjects::ConsumePointRequest.new(app_id, user_id, point)
+
+    def consume_point(user_id, event_name)
+      request = GfreshPoint::RequestObjects::ConsumePointRequest.new(app_id, user_id, event_name)
       use_case = GfreshPoint::Usecase::ConsumePointUsecase.new(repo)
       response = use_case.call(request)
       response
     end
 
-    def earn_point(user_id, point)
-      request = GfreshPoint::RequestObjects::EarnPointRequest.new(app_id, user_id, point)
+    def earn_point(user_id, event_name)
+      request = GfreshPoint::RequestObjects::EarnPointRequest.new(app_id, user_id, event_name)
       use_case = GfreshPoint::Usecase::EarnPointUsecase.new(repo)
       response = use_case.call(request)
       response

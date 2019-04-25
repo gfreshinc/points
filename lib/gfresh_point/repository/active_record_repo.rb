@@ -17,9 +17,13 @@ module GfreshPoint
           order(created_at: :desc).first
       end
 
-      def create_balance(app_id, user_id, point, balance)
+      def create_balance(app_id, user_id, point, balance, comment)
         transaction_protect
-        Balance.create!(app_id: app_id, user_id: user_id, point: point, balance: balance)
+        Balance.create!(app_id: app_id, user_id: user_id, point: point, balance: balance, comment: comment)
+      end
+
+      def get_rule_by_event_name(app_id, event_name)
+        Rule.where(app_id: app_id).where(event_name: event_name).first
       end
 
       private

@@ -26,6 +26,10 @@ module GfreshPoint
         Rule.where(app_id: app_id).where(event_name: event_name).first
       end
 
+      def list_user_points(app_id, user_id)
+        Balance.where(app_id: app_id).where(user_id: user_id).order(created_at: :desc)
+      end
+
       private
 
       def is_in_transcation?

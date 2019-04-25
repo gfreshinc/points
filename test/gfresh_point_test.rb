@@ -52,6 +52,14 @@ class GfreshPointTest < Minitest::Test
     assert_equal 100, balances.last.balance
   end
 
+  def test_list_user_points
+    balance = GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100, comment: @rule.to_json
+    )
+    response = @client.list_user_points(@user.id)
+    assert_equal [balance], response.value
+  end
+
   def teardown
     DatabaseCleaner.clean
   end

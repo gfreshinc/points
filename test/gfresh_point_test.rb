@@ -22,20 +22,26 @@ class GfreshPointTest < Minitest::Test
     assert_equal 200, @rule.reload.point
   end
 
-  def consume_point
+  def test_consume_point
     GfreshPoint::Repository::Balance.create!(
       user_id: @user.id, point: 200, balance: 200
     )
-
-    @client.earn_point(@user.id, 200)
     balances = GfreshPoint::Repository::Balance.where(user_id: @user.id)
     assert_equal 1, balances.count
-    assert_equal -200, balances.last.point
-    assert_equal 0, balances.last.balance
+    assert_equal 200, balances.last.point
+    assert_equal 200, balances.last.balance
   end
 
-  def earn_point
-    @client.earn_point(@user.id, 200)
+  def test_earn_point_without_transaction
+    response = @client.earn_point(@user.id, 200)
+    refute response.success?
+  end
+
+  def test_earn_point_with_transaction
+    ActiveRecord::Base.transaction do
+      response = @client.earn_point(@user.id, 200)
+      assert response.success?
+    end
     balances = GfreshPoint::Repository::Balance.where(user_id: @user.id)
     assert_equal 1, balances.count
     assert_equal 200, balances.last.point

@@ -14,7 +14,7 @@ module GfreshPoint
 
       def get_user_last_balance(app_id, user_id)
         Balance.where(app_id: app_id).where(user_id: user_id).
-          order(created_at: desc).first
+          order(created_at: :desc).first
       end
 
       def create_balance(app_id, user_id, point, balance)

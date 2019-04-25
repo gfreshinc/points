@@ -12,10 +12,10 @@ module GfreshPoint
           result = execute(request)
           generate_response(result)
         else
-          GfreshPoint::ResponseObjects::ResponseFailure(GfreshPoint::ResponseObjects::ResponseFailure::PARAMETERS_ERROR, request.errors)
+          GfreshPoint::ResponseObjects::ResponseFailure.new(GfreshPoint::ResponseObjects::ResponseFailure::PARAMETERS_ERROR, request.errors)
         end
       rescue StandardError => e
-        GfreshPoint::ResponseObjects::ResponseFailure(GfreshPoint::ResponseObjects::ResponseFailure::SYSTEM_ERROR, e.message)
+        GfreshPoint::ResponseObjects::ResponseFailure.new(GfreshPoint::ResponseObjects::ResponseFailure::SYSTEM_ERROR, e.message)
       end
 
       def generate_response(result)

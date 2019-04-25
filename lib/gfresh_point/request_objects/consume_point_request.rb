@@ -3,9 +3,9 @@ module GfreshPoint
     class ConsumePointRequest < RequestObject
       attr_accessor :app_id, :user_id, :point
 
-      def initialize(app_id, rule_id, point)
+      def initialize(app_id, user_id, point)
         @app_id = app_id
-        @rule_id = rule_id
+        @user_id = user_id
         @point = point
 
         if app_id.blank?

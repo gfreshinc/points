@@ -24,12 +24,16 @@ class GfreshPointTest < Minitest::Test
 
   def test_consume_point
     GfreshPoint::Repository::Balance.create!(
-      user_id: @user.id, point: 200, balance: 200
+      app_id: 'demo_app', user_id: @user.id, point: 200, balance: 200
     )
     balances = GfreshPoint::Repository::Balance.where(user_id: @user.id)
     assert_equal 1, balances.count
     assert_equal 200, balances.last.point
-    assert_equal 200, balances.last.balance
+    ActiveRecord::Base.transaction do
+      response = @client.consume_point(@user.id, 200)
+      assert response.success?
+    end
+    assert_equal 0, balances.last.balance
   end
 
   def test_earn_point_without_transaction

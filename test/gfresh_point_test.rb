@@ -30,10 +30,10 @@ class GfreshPointTest < Minitest::Test
     assert_equal 1, balances.count
     assert_equal 100, balances.last.point
     ActiveRecord::Base.transaction do
-      response = @client.consume_point(@user.id, @rule.event_name)
+      response = @client.consume_point(@user.id, 50)
       assert response.success?
     end
-    assert_equal 0, balances.last.balance
+    assert_equal 50, balances.last.balance
   end
 
   def test_earn_point_without_transaction

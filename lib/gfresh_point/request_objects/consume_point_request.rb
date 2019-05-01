@@ -1,12 +1,12 @@
 module GfreshPoint
   module RequestObjects
     class ConsumePointRequest < RequestObject
-      attr_accessor :app_id, :user_id, :event_name
+      attr_accessor :app_id, :user_id, :point
 
-      def initialize(app_id, user_id, event_name)
+      def initialize(app_id, user_id, point)
         @app_id = app_id
         @user_id = user_id
-        @event_name = event_name
+        @point = point
 
         if app_id.blank?
           add_error('app_id', "App id can not be blank")
@@ -14,8 +14,11 @@ module GfreshPoint
         if user_id.blank?
           add_error('user_id', "User id can not be blank")
         end
-        if event_name.blank?
-          add_error('point', "event_name can not be blank")
+        if point.blank?
+          add_error('point', "point can not be blank")
+        end
+        if point < 0
+          add_error('point', "point must larger than 0")
         end
       end
 

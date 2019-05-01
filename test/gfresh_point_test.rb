@@ -22,7 +22,7 @@ class GfreshPointTest < Minitest::Test
     assert_equal 200, @rule.reload.point
   end
 
-  def test_consume_point
+  def test_consume_point_with_enough_balance
     GfreshPoint::Repository::Balance.create!(
       app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100, comment: @rule.to_json
     )
@@ -32,8 +32,24 @@ class GfreshPointTest < Minitest::Test
     ActiveRecord::Base.transaction do
       response = @client.consume_point(@user.id, 50)
       assert response.success?
+      assert_equal 50, response.value
     end
     assert_equal 50, balances.last.balance
+  end
+
+  def test_consume_point_without_enough_balance
+    GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100, comment: @rule.to_json
+    )
+    balances = GfreshPoint::Repository::Balance.where(user_id: @user.id)
+    assert_equal 1, balances.count
+    assert_equal 100, balances.last.point
+    ActiveRecord::Base.transaction do
+      response = @client.consume_point(@user.id, 150)
+      assert response.success?
+      assert_equal 100, response.value
+    end
+    assert_equal 0, balances.last.balance
   end
 
   def test_earn_point_without_transaction

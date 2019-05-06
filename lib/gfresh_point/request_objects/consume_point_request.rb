@@ -16,8 +16,7 @@ module GfreshPoint
         end
         if point.blank?
           add_error('point', "point can not be blank")
-        end
-        if point < 0
+        elsif point < 0
           add_error('point', "point must larger than 0")
         end
       end

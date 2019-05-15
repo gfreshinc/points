@@ -30,7 +30,7 @@ class GfreshPointTest < Minitest::Test
     assert_equal 1, balances.count
     assert_equal 100, balances.last.point
     ActiveRecord::Base.transaction do
-      response = @client.consume_point(@user.id, 50)
+      response = @client.consume_point(@user.id, 50, {"foo": "bar"})
       assert response.success?
       assert_equal 50, response.value
     end
@@ -73,6 +73,14 @@ class GfreshPointTest < Minitest::Test
       app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100, comment: @rule.to_json
     )
     response = @client.list_user_points(@user.id)
+    assert_equal [balance], response.value
+  end
+
+  def test_list_user_points_with_query
+    balance = GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100, comment: {"foo": "bar"}
+    )
+    response = @client.list_user_points(@user.id, {"foo": "bar"})
     assert_equal [balance], response.value
   end
 

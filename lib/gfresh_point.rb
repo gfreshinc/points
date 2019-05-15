@@ -54,6 +54,13 @@ module GfreshPoint
       response
     end
 
+    # def list_consume_history(query = {})
+    #   request = GfreshPoint::RequestObjects::ConsumListRequest.new(filters: {app_id: app_id})
+    #   use_case = GfreshPoint::Usecase::RuleListUsecase.new(repo)
+    #   response = use_case.call(request)
+    #   response
+    # end
+
     def earn_point(user_id, event_name)
       request = GfreshPoint::RequestObjects::EarnPointRequest.new(app_id, user_id, event_name)
       use_case = GfreshPoint::Usecase::EarnPointUsecase.new(repo)
@@ -61,8 +68,8 @@ module GfreshPoint
       response
     end
 
-    def list_user_points(user_id)
-      request = GfreshPoint::RequestObjects::ListUserPointsRequest.new(app_id, user_id)
+    def list_user_points(user_id, query = {})
+      request = GfreshPoint::RequestObjects::ListUserPointsRequest.new(app_id, user_id, query)
       use_case = GfreshPoint::Usecase::ListUserPointsUsecase.new(repo)
       response = use_case.call(request)
       response

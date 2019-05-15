@@ -14,11 +14,10 @@ class CreateGfreshPointRule < ActiveRecord::Migration[5.2]
       t.string  :user_id
       t.integer :point
       t.integer :balance
-      t.string  :comment
+      t.json  :comment
       t.timestamps
     end
     add_index :gfresh_point_balances, :app_id
     add_index :gfresh_point_balances, :user_id
-
   end
 end

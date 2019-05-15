@@ -26,8 +26,15 @@ module GfreshPoint
         Rule.where(app_id: app_id).where(event_name: event_name).first
       end
 
-      def list_user_points(app_id, user_id)
-        Balance.where(app_id: app_id).where(user_id: user_id).order(created_at: :desc)
+      def list_user_points(app_id, user_id, query)
+        if query.blank?
+          Balance.where(app_id: app_id).where(user_id: user_id).order(created_at: :desc)
+        else
+          Balance.where(app_id: app_id).
+            where(user_id: user_id).
+            where("comment @> ?", query.to_json).
+            order(created_at: :desc)
+        end
       end
 
       private

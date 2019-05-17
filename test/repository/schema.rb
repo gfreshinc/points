@@ -21,7 +21,9 @@ ActiveRecord::Schema.define do
     t.string  :user_id
     t.integer :point
     t.integer :balance
-    t.string  :comment
+    t.string  :event_name
+    t.string  :origin_id
+    t.json    :comment
     t.timestamps
   end
   add_index :gfresh_point_balances, :app_id

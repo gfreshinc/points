@@ -14,6 +14,8 @@ class CreateGfreshPointRule < ActiveRecord::Migration[5.2]
       t.string  :user_id
       t.integer :point
       t.integer :balance
+      t.string  :event_name
+      t.string  :origin_id
       t.json  :comment
       t.timestamps
     end

@@ -54,8 +54,8 @@ module GfreshPoint
       response
     end
 
-    def earn_point(user_id, event_name)
-      request = GfreshPoint::RequestObjects::EarnPointRequest.new(app_id, user_id, event_name)
+    def earn_point(user_id, event_name, origin_id = nil)
+      request = GfreshPoint::RequestObjects::EarnPointRequest.new(app_id, user_id, event_name, origin_id)
       use_case = GfreshPoint::Usecase::EarnPointUsecase.new(repo)
       response = use_case.call(request)
       response

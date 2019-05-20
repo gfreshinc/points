@@ -6,7 +6,7 @@ module GfreshPoint
         raise "Rule not exist" if rule.blank?
         last_balance = repo.get_user_last_balance(request.app_id, request.user_id).try(:balance).to_i
         # save balance and rule snapshot
-        repo.create_balance(request.app_id, request.user_id, rule.point, last_balance + rule.point, rule.to_json)
+        repo.create_balance(request.app_id, request.user_id, rule.point, last_balance + rule.point, request.event_name, request.origin_id, rule.to_json)
       end
     end
   end

@@ -19,7 +19,8 @@ module GfreshPoint
 
       def create_balance(app_id, user_id, point, balance, event_name, origin_id, comment)
         transaction_protect
-        Balance.create!(app_id: app_id, user_id: user_id, point: point, balance: balance, comment: comment)
+        Balance.create!(app_id: app_id, user_id: user_id, point: point, balance: balance,
+                        origin_id: origin_id, event_name: event_name, comment: comment)
       end
 
       def get_rule_by_event_name(app_id, event_name)

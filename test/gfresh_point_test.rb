@@ -31,7 +31,7 @@ class GfreshPointTest < Minitest::Test
     assert_equal 1, balances.count
     assert_equal 100, balances.last.point
     ActiveRecord::Base.transaction do
-      response = @client.consume_point(@user.id, 50, 'test', "xyz", {"foo": "bar"})
+      response = @client.consume_point(@user.id, 50, 'test', "xyz", false, {"foo": "bar"})
       assert response.success?
       assert_equal 50, response.value
     end
@@ -47,7 +47,7 @@ class GfreshPointTest < Minitest::Test
     assert_equal 1, balances.count
     assert_equal 100, balances.last.point
     ActiveRecord::Base.transaction do
-      response = @client.consume_point(@user.id, 150, 'test', 'xyz', {"foo": "bar"})
+      response = @client.consume_point(@user.id, 150, 'test', 'xyz', false, {"foo": "bar"})
       assert response.success?
       assert_equal 100, response.value
     end

@@ -47,8 +47,8 @@ module GfreshPoint
       response
     end
 
-    def consume_point(user_id, point, event_name, origin_id, comment = {})
-      request = GfreshPoint::RequestObjects::ConsumePointRequest.new(app_id, user_id, point, event_name, origin_id, comment)
+    def consume_point(user_id, point, event_name, origin_id, force, comment = {})
+      request = GfreshPoint::RequestObjects::ConsumePointRequest.new(app_id, user_id, point, event_name, origin_id, force, comment)
       use_case = GfreshPoint::Usecase::ConsumePointUsecase.new(repo)
       response = use_case.call(request)
       response

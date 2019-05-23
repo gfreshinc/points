@@ -1,7 +1,7 @@
 module GfreshPoint
   module RequestObjects
     class ConsumePointRequest < RequestObject
-      attr_accessor :app_id, :user_id, :point, :event_name, :origin_id, :comment
+      attr_accessor :app_id, :user_id, :point, :event_name, :origin_id, :force, :comment
 
       def initialize(app_id, user_id, point, event_name, origin_id, force, comment)
         @app_id = app_id

@@ -5,6 +5,7 @@ module GfreshPoint
         last_balance = repo.get_user_last_balance(request.app_id, request.user_id).try(:balance).to_i
         if request.force
           raise "not enough point" if request.point > last_balance
+          consumed_point = request.point
         else
           consumed_point = [request.point, last_balance].min
         end

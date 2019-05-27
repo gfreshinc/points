@@ -5,6 +5,8 @@ module GfreshPoint
       PARAMETERS_ERROR = 'ParametersError'
       SYSTEM_ERROR     = 'SystemError'
 
+      attr_accessor :message
+
       def initialize(type, message)
         @type = type
         @message = message
@@ -13,6 +15,7 @@ module GfreshPoint
       def success?
         false
       end
+
     end
   end
 end

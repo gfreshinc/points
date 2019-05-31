@@ -10,7 +10,7 @@ module GfreshPoint
           consumed_point = [request.point, last_balance].min
         end
         # save balance and rule snapshot
-        repo.create_balance(request.app_id, request.user_id, request.point * -1, last_balance - consumed_point, request.event_name, request.origin_id, request.to_json)
+        repo.create_balance(request.app_id, request.user_id, request.point * -1, last_balance - consumed_point, request.event_name, request.origin_id, request.comment)
         consumed_point
       end
     end

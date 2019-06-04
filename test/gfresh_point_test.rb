@@ -52,6 +52,7 @@ class GfreshPointTest < Minitest::Test
       assert_equal 100, response.value
     end
     assert_equal 0, balances.last.balance
+    assert_equal -100, balances.last.point
   end
 
   def test_earn_point_without_transaction

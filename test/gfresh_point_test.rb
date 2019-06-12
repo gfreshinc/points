@@ -55,9 +55,34 @@ class GfreshPointTest < Minitest::Test
     assert_equal -100, balances.last.point
   end
 
+  def test_consume_0_point_should_not_effect
+    GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100,
+      balance: 100, comment: @rule.to_json
+    )
+    begin_count = GfreshPoint::Repository::Balance.where(user_id: @user.id).count
+    ActiveRecord::Base.transaction do
+      response = @client.consume_point(@user.id, 0, 'test', 'xyz', false, {"foo": "bar"})
+      assert response.success?
+    end
+    end_count = GfreshPoint::Repository::Balance.where(user_id: @user.id).count
+
+    assert_equal begin_count, end_count
+  end
+
   def test_earn_point_without_transaction
     response = @client.earn_point(@user.id, @rule.event_name)
     refute response.success?
+  end
+
+  def test_earn_0_point_should_note_effect
+    disabled_rule = GfreshPoint::Repository::Rule.create(app_id: "demo_app", point: 0, event_name: "foo")
+    begin_count = GfreshPoint::Repository::Balance.where(user_id: @user.id).count
+
+    response = @client.earn_point(@user.id, disabled_rule.event_name)
+    end_count = GfreshPoint::Repository::Balance.where(user_id: @user.id).count
+
+    assert_equal begin_count, end_count
   end
 
   def test_earn_point_with_transaction

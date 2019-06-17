@@ -40,8 +40,8 @@ module GfreshPoint
       response
     end
 
-    def update_rule_point(rule_id, point)
-      request = GfreshPoint::RequestObjects::UpdateRulePointRequest.new(app_id, rule_id, point)
+    def update_rule_point(rule_id, point, name = nil)
+      request = GfreshPoint::RequestObjects::UpdateRulePointRequest.new(app_id, rule_id, point, name)
       use_case = GfreshPoint::Usecase::UpdateRulePointUsecase.new(repo)
       response = use_case.call(request)
       response

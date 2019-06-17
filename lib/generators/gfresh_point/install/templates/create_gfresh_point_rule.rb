@@ -4,6 +4,7 @@ class CreateGfreshPointRule < ActiveRecord::Migration[5.2]
       t.string  :app_id
       t.string  :event_name
       t.integer :point
+      t.string  :name
 
       t.timestamps
     end

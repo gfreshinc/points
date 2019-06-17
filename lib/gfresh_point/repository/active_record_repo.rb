@@ -8,8 +8,8 @@ module GfreshPoint
         Rule.where(app_id: app_id)
       end
 
-      def update_rule_point(app_id, rule_id, point)
-        Rule.find(rule_id).update!(point: point)
+      def update_rule_point(app_id, rule_id, point, name)
+        Rule.find(rule_id).update!(point: point, name: name)
       end
 
       def get_user_last_balance(app_id, user_id)

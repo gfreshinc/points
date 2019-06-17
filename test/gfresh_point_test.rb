@@ -17,9 +17,10 @@ class GfreshPointTest < Minitest::Test
     assert_equal [@rule], response.value
   end
 
-  def test_update_rule_point
-    @client.update_rule_point(@rule.id, 200)
+  def test_update_rule_point_and_name
+    @client.update_rule_point(@rule.id, 200, 'hello')
     assert_equal 200, @rule.reload.point
+    assert_equal 'hello', @rule.reload.name
   end
 
   def test_consume_point_with_enough_balance

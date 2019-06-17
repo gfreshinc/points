@@ -1,11 +1,12 @@
 module GfreshPoint
   module RequestObjects
     class UpdateRulePointRequest < RequestObject
-      attr_accessor :app_id, :rule_id, :point
+      attr_accessor :app_id, :rule_id, :point, :name
 
-      def initialize(app_id, rule_id, point)
+      def initialize(app_id, rule_id, point, name)
         @app_id = app_id
         @rule_id = rule_id
+        @name = name
         @point = point
 
         if app_id.blank?

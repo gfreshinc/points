@@ -34,6 +34,14 @@ module GfreshPoint
         query.order(created_at: :desc)
       end
 
+      def fetch_user_points(app_id, user_id, event_name, origin_id)
+        result = list_user_points(app_id, user_id, event_name, origin_id)
+        result = result.where(read_at: nil)
+        return_result = result.to_a
+        result.update_all(read_at: Time.now)
+        return_result
+      end
+
       private
 
       def is_in_transcation?

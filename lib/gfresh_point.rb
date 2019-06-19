@@ -7,6 +7,7 @@ require "gfresh_point/usecase/update_rule_point_usecase"
 require "gfresh_point/usecase/earn_point_usecase"
 require "gfresh_point/usecase/consume_point_usecase"
 require "gfresh_point/usecase/list_user_points_usecase"
+require "gfresh_point/usecase/fetch_user_points_usecase"
 
 require "gfresh_point/repository/mem_repo"
 require "gfresh_point/repository/active_record_repo"
@@ -17,6 +18,7 @@ require "gfresh_point/request_objects/update_rule_point_request"
 require "gfresh_point/request_objects/earn_point_request"
 require "gfresh_point/request_objects/consume_point_request"
 require "gfresh_point/request_objects/list_user_points_request"
+require "gfresh_point/request_objects/fetch_user_points_request"
 
 require "gfresh_point/response_objects/response_success"
 require "gfresh_point/response_objects/response_failure"
@@ -64,6 +66,13 @@ module GfreshPoint
     def list_user_points(user_id, event_name = nil, origin_id = nil)
       request = GfreshPoint::RequestObjects::ListUserPointsRequest.new(app_id, user_id, event_name, origin_id)
       use_case = GfreshPoint::Usecase::ListUserPointsUsecase.new(repo)
+      response = use_case.call(request)
+      response
+    end
+
+    def fetch_user_points(user_id, event_name = nil, origin_id = nil)
+      request = GfreshPoint::RequestObjects::FetchUserPointsRequest.new(app_id, user_id, event_name, origin_id)
+      use_case = GfreshPoint::Usecase::FetchUserPointsUsecase.new(repo)
       response = use_case.call(request)
       response
     end

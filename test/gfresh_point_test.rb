@@ -115,6 +115,19 @@ class GfreshPointTest < Minitest::Test
     assert_equal [balance], response.value
   end
 
+  def test_fetch_user_point_balance
+    balance = GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100,
+      event_name: 'test', origin_id: 1, comment: {"foo": "bar"}
+    )
+
+    response = @client.fetch_user_points(@user.id, 'test', 1)
+    assert_equal [balance], response.value
+
+    response = @client.fetch_user_points(@user.id, 'test', 1)
+    assert_equal [], response.value
+  end
+
   def teardown
     DatabaseCleaner.clean
   end

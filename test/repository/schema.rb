@@ -23,6 +23,7 @@ ActiveRecord::Schema.define do
     t.integer :point
     t.integer :balance
     t.string  :event_name
+    t.datetime :read_at
     t.string  :origin_id
     t.json    :comment
     t.timestamps

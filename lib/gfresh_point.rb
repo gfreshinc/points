@@ -70,8 +70,8 @@ module GfreshPoint
       response
     end
 
-    def fetch_user_points(user_id, event_name = nil, origin_id = nil)
-      request = GfreshPoint::RequestObjects::FetchUserPointsRequest.new(app_id, user_id, event_name, origin_id)
+    def fetch_user_points(user_id, event_names = [], origin_id = nil)
+      request = GfreshPoint::RequestObjects::FetchUserPointsRequest.new(app_id, user_id, event_names, origin_id)
       use_case = GfreshPoint::Usecase::FetchUserPointsUsecase.new(repo)
       response = use_case.call(request)
       response

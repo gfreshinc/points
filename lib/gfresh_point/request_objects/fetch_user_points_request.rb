@@ -1,12 +1,12 @@
 module GfreshPoint
   module RequestObjects
     class FetchUserPointsRequest < RequestObject
-      attr_reader :app_id, :user_id, :event_name, :origin_id
+      attr_reader :app_id, :user_id, :event_names, :origin_id
 
-      def initialize(app_id, user_id, event_name, origin_id)
+      def initialize(app_id, user_id, event_names, origin_id)
         @app_id = app_id
         @user_id = user_id
-        @event_name = event_name
+        @event_names = event_names
         @origin_id = origin_id
 
         if user_id.blank?

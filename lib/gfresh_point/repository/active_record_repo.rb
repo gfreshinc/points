@@ -34,9 +34,11 @@ module GfreshPoint
         query.order(created_at: :desc)
       end
 
-      def fetch_user_points(app_id, user_id, event_name, origin_id)
-        result = list_user_points(app_id, user_id, event_name, origin_id)
-        result = result.where(read_at: nil)
+      def fetch_user_points(app_id, user_id, event_names, origin_id)
+        query = Balance.where(app_id: app_id).where(user_id: user_id)
+        query = query.where("event_name in (?)", event_names) unless event_names.blank?
+        query = query.where(origin_id: origin_id) unless origin_id.blank?
+        result = query.where(read_at: nil)
         return_result = result.to_a
         result.update_all(read_at: Time.now)
         return_result

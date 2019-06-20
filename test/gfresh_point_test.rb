@@ -116,15 +116,26 @@ class GfreshPointTest < Minitest::Test
   end
 
   def test_fetch_user_point_balance
-    balance = GfreshPoint::Repository::Balance.create!(
+    balance1 = GfreshPoint::Repository::Balance.create!(
       app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100,
-      event_name: 'test', origin_id: 1, comment: {"foo": "bar"}
+      event_name: 'test1', origin_id: 1, comment: {"foo": "bar"}
+    )
+    balance2 = GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100,
+      event_name: 'test2', origin_id: 1, comment: {"foo": "bar"}
+    )
+    balance3 = GfreshPoint::Repository::Balance.create!(
+      app_id: 'demo_app', user_id: @user.id, point: 100, balance: 100,
+      event_name: 'test3', origin_id: 1, comment: {"foo": "bar"}
     )
 
-    response = @client.fetch_user_points(@user.id, 'test', 1)
-    assert_equal [balance], response.value
+    response = @client.fetch_user_points(@user.id, ['test1'], 1)
+    assert_equal [balance1], response.value
 
-    response = @client.fetch_user_points(@user.id, 'test', 1)
+    response = @client.fetch_user_points(@user.id, ['test2', 'test3'], 1)
+    assert_equal [balance2, balance3].sort, response.value.sort
+
+    response = @client.fetch_user_points(@user.id, ['test3'], 1)
     assert_equal [], response.value
   end
 

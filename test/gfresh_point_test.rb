@@ -139,6 +139,27 @@ class GfreshPointTest < Minitest::Test
     assert_equal [], response.value
   end
 
+  def test_callback_hook
+    GfreshPoint::Client.singleton_class.class_eval do
+      define_method(:do_after_create_callback) do |balance|
+        raise "callback works and balance point is #{balance.point}"
+      end
+    end
+
+    err = assert_raises RuntimeError do
+      ActiveRecord::Base.transaction do
+        response = @client.earn_point(@user.id, @rule.event_name)
+      end
+    end
+    assert_equal "callback works and balance point is #{@rule.point}", err.message
+
+    GfreshPoint::Client.singleton_class.class_eval do
+      define_method(:do_after_create_callback) do |balance|
+        nil
+      end
+    end
+  end
+
   def teardown
     DatabaseCleaner.clean
   end

@@ -10,7 +10,6 @@ module GfreshPoint
         @point = point
         @balance = balance
       end
-
     end
   end
 end

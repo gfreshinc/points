@@ -77,5 +77,10 @@ module GfreshPoint
       response
     end
 
+    def self.do_after_create_callback(balance)
+      # binding.pry
+
+      # default blank
+    end
   end
 end

@@ -63,6 +63,14 @@ module GfreshPoint
 
     class Balance < ActiveRecord::Base
       self.table_name = "gfresh_point_balances"
+
+      after_create_commit :do_after_create_callback
+
+      def do_after_create_callback
+        # puts "dddd"
+        # binding.pry
+        GfreshPoint::Client.do_after_create_callback(self)
+      end
     end
   end
 end
